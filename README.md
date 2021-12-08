@@ -1,4 +1,4 @@
-# weather-rabbit
+# hello
 
 ## Project setup
 ```
