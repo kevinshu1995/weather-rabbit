@@ -8,10 +8,17 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 
+import { weatherCurrentRecord } from "@/apis/weather.js";
+
 export default {
     name: "App",
     components: {
         HelloWorld,
+    },
+
+    async mounted() {
+        const data = await weatherCurrentRecord();
+        console.log(data);
     },
 };
 </script>
