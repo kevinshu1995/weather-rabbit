@@ -1,35 +1,26 @@
 <template>
-    <div id="app">
-        <img alt="Vue logo" src="./assets/logo.png" />
-        <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="py-4">
+        <div class="container">
+            <Card>
+                <Lowest-temp />
+            </Card>
+            <Card>
+                <LowTempByElev />
+            </Card>
+        </div>
     </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
-import { weatherCurrentRecord } from "@/apis/weather.js";
-
+import LowestTemp from "@/components/LowestTemp.vue";
+import LowTempByElev from "@/components/LowTempByElev.vue";
+import Card from "@/components/Card.vue";
 export default {
     name: "App",
     components: {
-        HelloWorld,
-    },
-
-    async mounted() {
-        const data = await weatherCurrentRecord();
-        console.log(data);
+        Card,
+        LowTempByElev,
+        LowestTemp,
     },
 };
 </script>
-
-<style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-</style>
