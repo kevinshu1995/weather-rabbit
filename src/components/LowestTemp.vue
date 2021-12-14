@@ -37,20 +37,6 @@ export default {
     data() {
         return {
             location: null,
-            test: {
-                lat: "24.778333",
-                lon: "121.494583",
-                locationName: "福山",
-                stationId: "C0A560",
-                time: { obsTime: "2021-12-12 16:00:00" },
-                weatherElement: [{ elementName: "TEMP", elementValue: "15.8" }],
-                parameter: [
-                    { parameterName: "CITY", parameterValue: "新北市" },
-                    { parameterName: "CITY_SN", parameterValue: "06" },
-                    { parameterName: "TOWN", parameterValue: "烏來區" },
-                    { parameterName: "TOWN_SN", parameterValue: "061" },
-                ],
-            },
         };
     },
 
@@ -79,10 +65,12 @@ export default {
                         location.weatherElement.find(element => element.elementName === "TEMP");
                     const currentTemp = findTempObj(currentLocation);
                     const resultTemp = findTempObj(result);
-                    if (currentTemp !== undefined) {
+                    if (currentTemp === undefined) {
                         return result;
                     } else {
-                        return currentTemp.elementValue > resultTemp.elementValue ? result : currentLocation;
+                        return Number(currentTemp.elementValue) > Number(resultTemp.elementValue)
+                            ? result
+                            : currentLocation;
                     }
                 }, {});
                 return lowestLocation;
