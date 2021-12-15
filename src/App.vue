@@ -1,13 +1,19 @@
 <template>
     <div class="py-4">
-        <div class="container">
-            <Card>
-                <Lowest-temp />
-            </Card>
-            <Card>
-                <LowTempByElev />
-            </Card>
-        </div>
+        <ul class="container space-y-8">
+            <li class="space-y-2">
+                <h2 class="font-bold text-xl">第一題</h2>
+                <Card>
+                    <Lowest-temp />
+                </Card>
+            </li>
+            <li class="space-y-2">
+                <h2 class="font-bold text-xl">第二題</h2>
+                <Card>
+                    <LowTempByElev />
+                </Card>
+            </li>
+        </ul>
     </div>
 </template>
 

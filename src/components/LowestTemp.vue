@@ -7,7 +7,7 @@
             </div>
             <div class="self-end">
                 <div class="flex gap-2">
-                    <p class="text-5xl font-bold">{{ location.weatherElement[0].elementValue }}</p>
+                    <p class="text-5xl font-bold">{{ getElementValueByKey(location.weatherElement, "TEMP") }}</p>
                     <span class="self-end">°C</span>
                 </div>
             </div>
@@ -59,13 +59,12 @@ export default {
                 const { data } = await weatherCurrentRecord({
                     elementName: "TEMP",
                 });
+                const findTempObj = location => location.weatherElement.find(element => element.elementName === "TEMP");
                 const lowestLocation = data.records.location.reduce((result, currentLocation) => {
                     if (Object.keys(result).length === 0) return currentLocation;
-                    const findTempObj = location =>
-                        location.weatherElement.find(element => element.elementName === "TEMP");
                     const currentTemp = findTempObj(currentLocation);
                     const resultTemp = findTempObj(result);
-                    if (currentTemp === undefined) {
+                    if (currentTemp === undefined || Number(currentTemp.elementValue) === -99) {
                         return result;
                     } else {
                         return Number(currentTemp.elementValue) > Number(resultTemp.elementValue)
@@ -77,6 +76,11 @@ export default {
             } catch (error) {
                 console.error("get lowestTemp failed", error);
             }
+        },
+
+        getElementValueByKey(ary, key) {
+            if (!Array.isArray(ary)) return null;
+            return ary.find(item => item.elementName === key).elementValue;
         },
     },
 };

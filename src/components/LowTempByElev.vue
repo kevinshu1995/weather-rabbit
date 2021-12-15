@@ -1,15 +1,24 @@
 <template>
     <div class="text-gray-900">
-        <ul v-if="sortTempByElev">
+        <ul v-if="sortTempByElev" class="space-y-4">
             <template v-for="location in sortTempByElev">
                 <li :key="`sorted-location-with-elev-${location.stationId}`" class="flex flex-wrap gap-y-2">
                     <h3 class="w-full text-xs font-bold">
                         {{ location.elev }} ~ {{ Number(location.elev) + 499 }} 公尺
                     </h3>
-                    <p class="w-36 text-5xl font-bold">{{ getElementValueByKey(location.weatherElement, "TEMP") }}</p>
-                    <div class="flex">
-                        <p>{{ location.locationName }}</p>
-                        <p>{{ getElementValueByKey(location.weatherElement, "ELEV") }}</p>
+                    <p class="w-36 flex gap-2">
+                        <span class="text-5xl font-bold">
+                            {{ getElementValueByKey(location.weatherElement, "TEMP") }}
+                        </span>
+                        <span class="text-sm self-end">°C</span>
+                    </p>
+                    <div class="flex flex-col justify-between">
+                        <p class="text-sm text-gray-700">
+                            {{ getElementValueByKey(location.weatherElement, "ELEV") }} 公尺
+                        </p>
+                        <p class="font-bold text-xl">
+                            {{ locationName(location.parameter) }} {{ location.locationName }}
+                        </p>
                     </div>
                 </li>
             </template>
@@ -44,20 +53,23 @@ export default {
 
                 const level = Math.floor(elevCurrent / 500) * 500;
 
-                if (all.level === undefined) {
-                    all[level] = current;
-                } else {
-                    const tempInAll = Number(getValue(all[level].weatherElement, "TEMP"));
-                    if (tempInAll > tempCurrent) {
+                if (Number(tempCurrent) !== -99) {
+                    if (all[level] === undefined) {
                         all[level] = current;
-                    } else if (tempInAll === tempCurrent) {
-                        console.log("居然有同溫度的...");
-                        all[level].sameTemp =
-                            all[level].sameTemp === undefined
-                                ? [all[level], current]
-                                : [...all[level].sameTemp, current];
+                    } else {
+                        const tempInAll = Number(getValue(all[level].weatherElement, "TEMP"));
+                        if (tempInAll > tempCurrent) {
+                            all[level] = current;
+                        } else if (tempInAll === tempCurrent) {
+                            console.log("居然有同溫度的...");
+                            all[level].sameTemp =
+                                all[level].sameTemp === undefined
+                                    ? [all[level], current]
+                                    : [...all[level].sameTemp, current];
+                        }
                     }
                 }
+
                 return all;
             }, {});
         },
@@ -85,6 +97,14 @@ export default {
         getElementValueByKey(ary, key) {
             if (!Array.isArray(ary)) return null;
             return ary.find(item => item.elementName === key).elementValue;
+        },
+
+        getParamByKey(ary, key) {
+            if (!Array.isArray(ary)) return null;
+            return ary.find(item => item.parameterName === key).parameterValue;
+        },
+        locationName(parameter) {
+            return `${this.getParamByKey(parameter, "CITY")} ${this.getParamByKey(parameter, "TOWN")}`;
         },
     },
 };
