@@ -13,6 +13,12 @@
                     <LowTempByElev />
                 </Card>
             </li>
+            <li class="space-y-2">
+                <h2 class="font-bold text-xl">第三題</h2>
+                <Card>
+                    <Rain />
+                </Card>
+            </li>
         </ul>
     </div>
 </template>
@@ -20,6 +26,7 @@
 <script>
 import LowestTemp from "@/components/LowestTemp.vue";
 import LowTempByElev from "@/components/LowTempByElev.vue";
+import Rain from "@/components/Rain.vue";
 import Card from "@/components/Card.vue";
 export default {
     name: "App",
@@ -27,6 +34,7 @@ export default {
         Card,
         LowTempByElev,
         LowestTemp,
+        Rain,
     },
 };
 </script>
