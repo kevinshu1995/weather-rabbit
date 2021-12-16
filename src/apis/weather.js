@@ -15,9 +15,19 @@ const Params = (params = {}) => {
 };
 
 /**
- *  GET 自動氣象站資料-無人自動站氣象資料
+ *  GET /v1/rest/datastore/O-A0001-001
+ *  自動氣象站-氣象觀測資料
  *  @returns {Promise}
  */
 export function weatherCurrentRecord(params = {}) {
     return axios.get("/O-A0001-001", Params(params));
+}
+
+/**
+ *  GET /v1/rest/datastore/O-A0002-001
+ *  自動雨量站-雨量觀測資料
+ *  @returns {Promise}
+ */
+export function rainCurrentRecord(params = {}) {
+    return axios.get("/O-A0002-001", Params(params));
 }
