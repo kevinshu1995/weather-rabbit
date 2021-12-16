@@ -51,6 +51,7 @@ export default {
             this.data = data;
             this.status = status;
             this.lowestLocation = lowestLocation;
+            console.log("第一題", lowestLocation);
         },
     },
 };
