@@ -7,11 +7,20 @@ export async function Temperature() {
         elementName: "TEMP,ELEV",
     });
 
-    const _lowestLocation = data.records.location.reduce((result, currentLocation) => {
+    const lowestLocation = data.records.location.reduce((result, currentLocation) => {
         const currentTemp = getElementValueByKey(currentLocation.weatherElement, "TEMP");
 
         currentLocation = {
-            ...currentLocation,
+            latLon: {
+                lat: currentLocation.lat,
+                lon: currentLocation.lon,
+            },
+            location: {
+                name: currentLocation.locationName,
+                city: getParameterValueByKey(currentLocation.parameter, "CITY"),
+                town: getParameterValueByKey(currentLocation.parameter, "TOWN"),
+            },
+            time: currentLocation.time && currentLocation.time.obsTime,
             temperature: currentTemp,
         };
 
@@ -23,20 +32,6 @@ export async function Temperature() {
             return Number(currentTemp) > Number(result.temperature) ? result : currentLocation;
         }
     }, {});
-
-    const lowestLocation = {
-        latLon: {
-            lat: _lowestLocation.lat,
-            lon: _lowestLocation.lon,
-        },
-        location: {
-            name: _lowestLocation.locationName,
-            city: getParameterValueByKey(_lowestLocation.parameter, "CITY"),
-            town: getParameterValueByKey(_lowestLocation.parameter, "TOWN"),
-        },
-        time: _lowestLocation.time && _lowestLocation.time.obsTime,
-        temperature: _lowestLocation.temperature,
-    };
 
     // TODO 依照海拔排列
     // const lowestLocationByElev = null
