@@ -1,7 +1,6 @@
-import { weatherCurrentRecord } from "./weather.js";
+import { weatherCurrentRecord, helpers } from "./weather.js";
 
-const getElementValueByKey = (obj, key) => obj.find(element => element.elementName === key).elementValue;
-const getParameterValueByKey = (obj, key) => obj.find(element => element.parameterName === key).parameterValue;
+const { getElementValueByKey, getParameterValueByKey } = helpers;
 
 export async function Temperature() {
     const { data, status } = await weatherCurrentRecord({

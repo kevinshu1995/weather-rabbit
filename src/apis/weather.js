@@ -14,6 +14,14 @@ const Params = (params = {}) => {
     };
 };
 
+const getElementValueByKey = (obj, key) => obj.find(element => element.elementName === key).elementValue;
+const getParameterValueByKey = (obj, key) => obj.find(element => element.parameterName === key).parameterValue;
+
+export const helpers = {
+    getElementValueByKey,
+    getParameterValueByKey,
+};
+
 /**
  *  GET /v1/rest/datastore/O-A0001-001
  *  自動氣象站-氣象觀測資料
