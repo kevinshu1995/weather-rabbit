@@ -39,3 +39,12 @@ export function weatherCurrentRecord(params = {}) {
 export function rainCurrentRecord(params = {}) {
     return axios.get("/O-A0002-001", Params(params));
 }
+
+/**
+ *  GET /v1/rest/datastore/F-D0047-091
+ *  鄉鎮天氣預報-臺灣未來1週天氣預報
+ *  @returns {Promise}
+ */
+export function weeklyWeatherPredict(params = {}) {
+    return axios.get("/F-D0047-091", Params(params));
+}
