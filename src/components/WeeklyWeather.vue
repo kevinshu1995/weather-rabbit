@@ -75,6 +75,7 @@ export default {
             this.getLocationTempMaxDiff = getLocationTempMaxDiff;
             this.locationOptions = allLocations;
             this.status = status;
+            console.log("第四題 要選一下城市");
         },
 
         onChangeLocation() {

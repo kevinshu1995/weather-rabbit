@@ -48,7 +48,7 @@ export default {
             const { lowestLocationByElev, sortedLowestLocationByElev, status } = await new Temperature();
             this.sortedLowestLocationByElev = sortedLowestLocationByElev;
             this.status = status;
-            console.log("第二題", lowestLocationByElev);
+            console.log("第二題 目前每 500 公尺海拔的最低溫區域: ", lowestLocationByElev);
         },
     },
 };
