@@ -1,6 +1,5 @@
-import { rainCurrentRecord, helpers } from "./weather.js";
-
-const { getElementValueByKey, getParameterValueByKey } = helpers;
+import { rainCurrentRecord } from "./weather.js";
+import { getElementValueByKey, getParameterValueByKey } from "./helpers.js";
 
 export async function Rain() {
     const apiResponse = await rainCurrentRecord({

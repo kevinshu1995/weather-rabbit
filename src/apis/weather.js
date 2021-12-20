@@ -14,18 +14,6 @@ const Params = (params = {}) => {
     };
 };
 
-const getElementValueByKey = (obj, key) => obj.find(element => element.elementName === key).elementValue;
-const getTimeByKey = (obj, key) => obj.find(element => element.elementName === key).time;
-const getParameterValueByKey = (obj, key) => obj.find(element => element.parameterName === key).parameterValue;
-const dealAvailableValue = value => (Number(value) === -99 ? null : value);
-
-export const helpers = {
-    getElementValueByKey,
-    getParameterValueByKey,
-    getTimeByKey,
-    dealAvailableValue,
-};
-
 export const allLocations = [
     { text: "臺北市", value: "臺北市" },
     { text: "新北市", value: "新北市" },

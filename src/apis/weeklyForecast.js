@@ -1,4 +1,5 @@
-import { weeklyWeatherForecast, allLocations, helpers } from "./weather.js";
+import { weeklyWeatherForecast, allLocations } from "./weather.js";
+import { getTimeByKey, dealAvailableValue } from "./helpers.js";
 
 export async function weeklyForecast() {
     const { data, status } = await weeklyWeatherForecast({
@@ -6,8 +7,6 @@ export async function weeklyForecast() {
     });
 
     const locations = data.records.locations[0].location;
-
-    const { getTimeByKey, dealAvailableValue } = helpers;
 
     /**
      *  * 最高/低溫
