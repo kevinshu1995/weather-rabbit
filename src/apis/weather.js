@@ -4,11 +4,11 @@ const axios = Axios.create({
     baseURL: "https://opendata.cwb.gov.tw/api/v1/rest/datastore/",
 });
 
-const Authorization = "CWB-A00AAFC4-FFD9-4A03-A760-7F9336CE62FC";
-const Params = (params = {}) => {
+const authorization = "CWB-A00AAFC4-FFD9-4A03-A760-7F9336CE62FC";
+const concatParamsForApi = (params = {}) => {
     return {
         params: {
-            Authorization,
+            authorization,
             ...params,
         },
     };
@@ -45,7 +45,7 @@ export const allLocations = [
  *  @returns {Promise}
  */
 export function weatherCurrentRecord(params = {}) {
-    return axios.get("/O-A0001-001", Params(params));
+    return axios.get("/O-A0001-001", concatParamsForApi(params));
 }
 
 /**
@@ -54,7 +54,7 @@ export function weatherCurrentRecord(params = {}) {
  *  @returns {Promise}
  */
 export function rainCurrentRecord(params = {}) {
-    return axios.get("/O-A0002-001", Params(params));
+    return axios.get("/O-A0002-001", concatParamsForApi(params));
 }
 
 /**
@@ -63,5 +63,5 @@ export function rainCurrentRecord(params = {}) {
  *  @returns {Promise}
  */
 export function weeklyWeatherForecast(params = {}) {
-    return axios.get("/F-D0047-091", Params(params));
+    return axios.get("/F-D0047-091", concatParamsForApi(params));
 }
