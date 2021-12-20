@@ -4,7 +4,7 @@
             <li class="space-y-2">
                 <h2 class="font-bold text-xl">第一題</h2>
                 <Card>
-                    <Lowest-temp />
+                    <LowestTemp />
                 </Card>
             </li>
             <li class="space-y-2">
