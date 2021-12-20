@@ -1,5 +1,5 @@
 import { weatherCurrentRecord } from "./weather.js";
-import { getElementValueByKey, getParameterValueByKey } from "./helpers.js";
+import { getElementValueByKey, getParameterValueByKey, unAvailableValue } from "./helpers.js";
 
 export async function Temperature() {
     const { data, status } = await weatherCurrentRecord({
@@ -37,7 +37,7 @@ export async function Temperature() {
         const currentTemp = currentLocation.temperature;
 
         if (Object.keys(result).length === 0) return currentLocation;
-        if (Number(currentTemp) === -99) return result;
+        if (Number(currentTemp) === unAvailableValue) return result;
 
         return Number(currentTemp) > Number(result.temperature) ? result : currentLocation;
     }, {});
@@ -52,7 +52,7 @@ export async function Temperature() {
         const level = Math.floor(elevCurrent / 500) * 500;
 
         if (isNaN(tempCurrent) || isNaN(elevCurrent)) return all;
-        if (current.temperature === -99) return all;
+        if (current.temperature === unAvailableValue) return all;
 
         if (all[level] === undefined) {
             all[level] = current;

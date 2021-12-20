@@ -1,7 +1,9 @@
-export const getElementValueByKey = (obj, key) => obj.find(element => element.elementName === key).elementValue;
+export const unAvailableValue = -99;
 
-export const getTimeByKey = (obj, key) => obj.find(element => element.elementName === key).time;
+export const getElementValueByKey = (ary, key) => ary.find(element => element.elementName === key).elementValue;
 
-export const getParameterValueByKey = (obj, key) => obj.find(element => element.parameterName === key).parameterValue;
+export const getTimeByKey = (ary, key) => ary.find(element => element.elementName === key).time;
 
-export const dealAvailableValue = value => (Number(value) === -99 ? null : value);
+export const getParameterValueByKey = (ary, key) => ary.find(element => element.parameterName === key).parameterValue;
+
+export const dealAvailableValue = value => (Number(value) === unAvailableValue ? null : value);
