@@ -15,6 +15,7 @@ export async function weeklyForecast() {
      *  @return {String} 攝氏度
      */
     const getLocationTempExtreme = (location, target = "highest") => {
+        if (target !== "highest" && target !== "lowest") throw "second parameter is not validated";
         const targetLocation = locations.find(item => item.locationName === location);
         const elementNames = {
             highest: "MaxT",
@@ -27,7 +28,8 @@ export async function weeklyForecast() {
             const allValue = all.elementValue[0].value;
             const currentValue = current.elementValue[0].value;
 
-            return allValue > currentValue ? current : all;
+            if (target === "highest") return allValue < currentValue ? current : all;
+            if (target === "lowest") return allValue > currentValue ? current : all;
         }, {}).elementValue[0].value;
     };
 
