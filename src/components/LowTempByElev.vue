@@ -45,7 +45,7 @@ export default {
 
     methods: {
         async getData() {
-            const { lowestLocationByElev, sortedLowestLocationByElev, status } = await new Temperature();
+            const { lowestLocationByElev, sortedLowestLocationByElev, status } = await Temperature();
             this.sortedLowestLocationByElev = sortedLowestLocationByElev;
             this.status = status;
             console.log("第二題 目前每 500 公尺海拔的最低溫區域: ", lowestLocationByElev);

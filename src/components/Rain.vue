@@ -48,7 +48,7 @@ export default {
 
     methods: {
         async getData() {
-            const { status, top20RainLocations } = await new Rain();
+            const { status, top20RainLocations } = await Rain();
             this.status = status;
             this.top20RainLocations = top20RainLocations;
             console.log("第三題 近 24 小時前 20 名降雨量:", top20RainLocations);
