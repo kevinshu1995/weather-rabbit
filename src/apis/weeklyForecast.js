@@ -22,15 +22,13 @@ export async function weeklyForecast() {
             lowest: "MinT",
         };
         const timeTempData = getTimeByKey(targetLocation.weatherElement, elementNames[target]);
-        return timeTempData.reduce((all, current) => {
-            if (all.elementValue === undefined) return current;
 
-            const allValue = all.elementValue[0].value;
+        const initValue = target === "highest" ? -Infinity : Infinity;
+        const mathMethod = target === "highest" ? "max" : "min";
+        return timeTempData.reduce((acc, current) => {
             const currentValue = current.elementValue[0].value;
-
-            if (target === "highest") return allValue < currentValue ? current : all;
-            if (target === "lowest") return allValue > currentValue ? current : all;
-        }, {}).elementValue[0].value;
+            return Math[mathMethod](acc, currentValue);
+        }, initValue);
     };
 
     /**
