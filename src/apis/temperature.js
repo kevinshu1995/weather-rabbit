@@ -4,30 +4,35 @@ import { getElementValueByKey, getParameterValueByKey, unAvailableValue } from "
 export async function Temperature() {
     const { data, status } = await getWeatherCurrentRecord({
         elementName: "TEMP,ELEV",
+        parameterName: "CITY,TOWN",
     });
 
     /**
      *  * 調整資料結構
      *  {Array}
      */
-    const refactorData = data.records.location.map(item => {
-        const temp = Number(getElementValueByKey(item.weatherElement, "TEMP"));
-        const elev = Number(getElementValueByKey(item.weatherElement, "ELEV"));
-        return {
-            latLon: {
-                lat: item.lat,
-                lon: item.lon,
-            },
-            location: {
-                name: item.locationName,
-                city: getParameterValueByKey(item.parameter, "CITY"),
-                town: getParameterValueByKey(item.parameter, "TOWN"),
-            },
-            time: item.time && item.time.obsTime,
-            temperature: temp,
-            locationElev: elev,
-        };
-    });
+    const refactorData = data.records.location
+        .map(item => {
+            const temp = Number(getElementValueByKey(item.weatherElement, "TEMP"));
+            const elev = Number(getElementValueByKey(item.weatherElement, "ELEV"));
+            return {
+                latLon: {
+                    lat: item.lat,
+                    lon: item.lon,
+                },
+                location: {
+                    name: item.locationName,
+                    city: getParameterValueByKey(item.parameter, "CITY"),
+                    town: getParameterValueByKey(item.parameter, "TOWN"),
+                },
+                time: item.time && item.time.obsTime,
+                temperature: temp,
+                locationElev: elev,
+            };
+        })
+        .filter(
+            item => Number(item.temperature) !== unAvailableValue && Number(item.locationElev) !== unAvailableValue
+        );
 
     /**
      *  * 最低溫的地區
@@ -37,7 +42,6 @@ export async function Temperature() {
         const currentTemp = currentLocation.temperature;
 
         if (Object.keys(result).length === 0) return currentLocation;
-        if (Number(currentTemp) === unAvailableValue) return result;
 
         return Number(currentTemp) > Number(result.temperature) ? result : currentLocation;
     }, {});
@@ -52,7 +56,6 @@ export async function Temperature() {
         const level = Math.floor(elevCurrent / 500) * 500;
 
         if (isNaN(tempCurrent) || isNaN(elevCurrent)) return all;
-        if (current.temperature === unAvailableValue) return all;
 
         if (all[level] === undefined) {
             all[level] = current;
