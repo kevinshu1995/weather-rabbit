@@ -40,12 +40,12 @@ export const allLocations = [
 ];
 
 /**
- *  GET /v1/rest/datastore/O-A0001-001
- *  自動氣象站-氣象觀測資料
+ *  GET /v1/rest/datastore/O-A0003-001
+ *  局屬氣象站-現在天氣觀測報告
  *  @returns {Promise}
  */
 export function getWeatherCurrentRecord(params = {}) {
-    return axios.get("/O-A0001-001", concatParamsForApi(params));
+    return axios.get("/O-A0003-001", concatParamsForApi(params));
 }
 
 /**
