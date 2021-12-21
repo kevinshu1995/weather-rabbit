@@ -1,8 +1,8 @@
 <template>
     <div class="text-gray-900">
-        <ul v-if="sortedLowestLocationByElev && status === 200" class="space-y-4">
+        <ul v-if="sortedLowestLocationByElevation && status === 200" class="space-y-4">
             <li
-                v-for="(location, i) in sortedLowestLocationByElev"
+                v-for="(location, i) in sortedLowestLocationByElevation"
                 :key="`sorted-location-with-elev-${i}`"
                 class="flex flex-wrap gap-y-2"
             >
@@ -30,11 +30,11 @@
 import { Temperature } from "@/apis/temperature.js";
 
 export default {
-    name: "LowTempByElev",
+    name: "LowTempByElevation",
 
     data() {
         return {
-            sortedLowestLocationByElev: null,
+            sortedLowestLocationByElevation: null,
             status: null,
         };
     },
@@ -45,10 +45,10 @@ export default {
 
     methods: {
         async getData() {
-            const { lowestLocationByElev, sortedLowestLocationByElev, status } = await Temperature();
-            this.sortedLowestLocationByElev = sortedLowestLocationByElev;
+            const { lowestLocationByElevation, sortedLowestLocationByElevation, status } = await Temperature();
+            this.sortedLowestLocationByElevation = sortedLowestLocationByElevation;
             this.status = status;
-            console.log("第二題 目前每 500 公尺海拔的最低溫區域: ", lowestLocationByElev);
+            console.log("第二題 目前每 500 公尺海拔的最低溫區域: ", lowestLocationByElevation);
         },
     },
 };

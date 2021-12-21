@@ -46,7 +46,7 @@ export async function Temperature() {
      *  * 各海拔最低溫地區
      *  {Object}
      */
-    const lowestLocationByElev = refactorData.reduce((all, current) => {
+    const lowestLocationByElevation = refactorData.reduce((all, current) => {
         const tempCurrent = current.temperature;
         const elevCurrent = current.locationElev;
         const level = Math.floor(elevCurrent / 500) * 500;
@@ -74,7 +74,7 @@ export async function Temperature() {
      *  * 各海拔排列，最低溫的地區
      *  {Array}
      */
-    const sortedLowestLocationByElev = Object.entries(lowestLocationByElev)
+    const sortedLowestLocationByElevation = Object.entries(lowestLocationByElevation)
         .map(([elev, item]) => {
             return { ...item, elev };
         })
@@ -86,7 +86,7 @@ export async function Temperature() {
         data,
         status,
         lowestLocation,
-        lowestLocationByElev,
-        sortedLowestLocationByElev,
+        lowestLocationByElevation,
+        sortedLowestLocationByElevation,
     };
 }
