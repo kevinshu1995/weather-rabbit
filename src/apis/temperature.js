@@ -64,8 +64,11 @@ export async function Temperature() {
             all[level] = current;
         } else if (tempInAll === tempCurrent) {
             // * 同溫度
-            all[level].sameTemp =
-                all[level].sameTemp === undefined ? [all[level], current] : [...all[level].sameTemp, current];
+            const existSameTempArray = all[level].sameTemp || [all[level]];
+            all[level] = {
+                ...all[level],
+                sameTemp: [...existSameTempArray, current],
+            };
         }
         return all;
     }, {});
