@@ -1,8 +1,8 @@
-import { rainCurrentRecord } from "./weather.js";
+import { getRainCurrentRecord } from "./weather.js";
 import { getElementValueByKey, getParameterValueByKey } from "./helpers.js";
 
 export async function Rain() {
-    const apiResponse = await rainCurrentRecord({
+    const apiResponse = await getRainCurrentRecord({
         elementName: "HOUR_24",
         parameterName: "CITY,TOWN",
     });

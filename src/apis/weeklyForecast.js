@@ -1,8 +1,8 @@
-import { weeklyWeatherForecast, allLocations } from "./weather.js";
+import { getWeeklyWeatherForecast, allLocations } from "./weather.js";
 import { getTimeByKey, dealAvailableValue } from "./helpers.js";
 
 export async function weeklyForecast() {
-    const { data, status } = await weeklyWeatherForecast({
+    const { data, status } = await getWeeklyWeatherForecast({
         elementName: "MinT,MaxT",
     });
 

@@ -44,7 +44,7 @@ export const allLocations = [
  *  自動氣象站-氣象觀測資料
  *  @returns {Promise}
  */
-export function weatherCurrentRecord(params = {}) {
+export function getWeatherCurrentRecord(params = {}) {
     return axios.get("/O-A0001-001", concatParamsForApi(params));
 }
 
@@ -53,7 +53,7 @@ export function weatherCurrentRecord(params = {}) {
  *  自動雨量站-雨量觀測資料
  *  @returns {Promise}
  */
-export function rainCurrentRecord(params = {}) {
+export function getRainCurrentRecord(params = {}) {
     return axios.get("/O-A0002-001", concatParamsForApi(params));
 }
 
@@ -62,6 +62,6 @@ export function rainCurrentRecord(params = {}) {
  *  鄉鎮天氣預報-臺灣未來1週天氣預報
  *  @returns {Promise}
  */
-export function weeklyWeatherForecast(params = {}) {
+export function getWeeklyWeatherForecast(params = {}) {
     return axios.get("/F-D0047-091", concatParamsForApi(params));
 }

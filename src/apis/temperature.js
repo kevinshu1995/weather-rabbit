@@ -1,8 +1,8 @@
-import { weatherCurrentRecord } from "./weather.js";
+import { getWeatherCurrentRecord } from "./weather.js";
 import { getElementValueByKey, getParameterValueByKey, unAvailableValue } from "./helpers.js";
 
 export async function Temperature() {
-    const { data, status } = await weatherCurrentRecord({
+    const { data, status } = await getWeatherCurrentRecord({
         elementName: "TEMP,ELEV",
     });
 
