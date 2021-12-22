@@ -65,3 +65,12 @@ export function getRainCurrentRecord(params = {}) {
 export function getWeeklyWeatherForecast(params = {}) {
     return axios.get("/F-D0047-091", concatParamsForApi(params));
 }
+
+/**
+ *  GET /v1/rest/datastore/F-D0047-089
+ *  鄉鎮天氣預報-臺灣未來 2 天天氣預報
+ *  @returns {Promise}
+ */
+export function getTwoDaysForecast(params = {}) {
+    return axios.get("/F-D0047-089", concatParamsForApi(params));
+}
