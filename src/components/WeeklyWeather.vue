@@ -48,6 +48,7 @@
 
 <script>
 import { weeklyForecast } from "@/apis/weeklyForecast.js";
+import { cities as allLocations } from "@/apis/locations.js";
 export default {
     name: "WeeklyWeather",
 
@@ -70,7 +71,7 @@ export default {
 
     methods: {
         async getData() {
-            const { getLocationTempExtreme, getLocationTempMaxDiff, allLocations, status } = await weeklyForecast();
+            const { getLocationTempExtreme, getLocationTempMaxDiff, status } = await weeklyForecast();
             this.getLocationTempExtreme = getLocationTempExtreme;
             this.getLocationTempMaxDiff = getLocationTempMaxDiff;
             this.locationOptions = allLocations;
