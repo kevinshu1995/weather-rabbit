@@ -30,9 +30,7 @@ export async function Temperature() {
                 locationElev: elev,
             };
         })
-        .filter(
-            item => Number(item.temperature) !== unAvailableValue && Number(item.locationElev) !== unAvailableValue
-        );
+        .filter(item => item.temperature !== unAvailableValue && item.locationElev !== unAvailableValue);
 
     /**
      *  * 最低溫的地區
@@ -43,7 +41,7 @@ export async function Temperature() {
 
         if (Object.keys(result).length === 0) return currentLocation;
 
-        return Number(currentTemp) > Number(result.temperature) ? result : currentLocation;
+        return currentTemp > result.temperature ? result : currentLocation;
     }, {});
 
     /**
