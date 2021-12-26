@@ -30,7 +30,13 @@ export async function Temperature() {
                 locationElev: elev,
             };
         })
-        .filter(item => item.temperature !== unAvailableValue && item.locationElev !== unAvailableValue);
+        .filter(
+            item =>
+                item.temperature !== unAvailableValue &&
+                item.locationElev !== unAvailableValue &&
+                typeof item.temperature === "number" &&
+                typeof item.locationElev === "number"
+        );
 
     /**
      *  * 最低溫的地區
@@ -52,8 +58,6 @@ export async function Temperature() {
         const tempCurrent = current.temperature;
         const elevCurrent = current.locationElev;
         const level = Math.floor(elevCurrent / 500) * 500;
-
-        if (isNaN(tempCurrent) || isNaN(elevCurrent)) return all;
 
         if (all[level] === undefined) {
             all[level] = current;
